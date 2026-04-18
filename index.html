@@ -206,44 +206,26 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 .btn-ghost:hover { color: var(--ink); border-color: var(--teal); background: rgba(61, 212, 204, 0.06); transform: translateY(-3px); }
 .section { padding: 80px 0; position: relative; }
 
-/* Work grid */
+/* Work subhead */
 .work-subhead {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   color: var(--teal);
-  margin: 0 auto 24px;
+  margin: 0 auto 20px;
   text-align: center;
   font-weight: 500;
   max-width: 760px;
 }
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  max-width: 760px;
-  margin: 0 auto;
-}
-@media (max-width: 640px) {
-  .work-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.work-grid + .work-grid { margin-top: 16px; }
-.work-grid--tall {
-  grid-template-columns: repeat(6, 1fr);
-  max-width: 1040px;
-}
-.work-grid--tall .work-item { aspect-ratio: 3 / 4; }
-@media (max-width: 900px) {
-  .work-grid--tall { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 640px) {
-  .work-grid--tall { grid-template-columns: repeat(2, 1fr); }
+.work-subhead + .carousel + .work-subhead,
+.carousel + .work-subhead {
+  margin-top: 56px;
 }
 
 /* Carousel */
 .carousel {
   position: relative;
-  max-width: 900px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 .carousel-track {
@@ -252,28 +234,49 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 4px 4px 12px;
+  padding: 4px 48px 14px;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  align-items: stretch;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 .carousel .carousel-item {
-  flex: 0 0 260px;
-  aspect-ratio: 4 / 5;
+  flex: 0 0 auto;
+  height: 360px;
+  width: auto;
+  aspect-ratio: auto;
   scroll-snap-align: center;
+  padding: 0;
+  background: #0e1114;
+  position: relative;
+}
+.carousel .carousel-item img {
+  position: static;
+  inset: auto;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  display: block;
+}
+.carousel .carousel-item .work-fallback {
+  position: absolute;
+  inset: 0;
+  min-width: 240px;
 }
 @media (max-width: 640px) {
-  .carousel .carousel-item { flex-basis: 75vw; }
+  .carousel .carousel-item { height: 280px; }
+  .carousel-track { padding: 4px 16px 14px; }
 }
 .carousel-nav {
   position: absolute;
-  top: calc(50% - 6px);
+  top: calc(50% - 7px);
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
   border-radius: 50%;
   border: 1px solid var(--border);
-  background: rgba(7, 9, 11, 0.8);
+  background: rgba(7, 9, 11, 0.85);
   color: var(--ink);
   font-size: 22px;
   line-height: 1;
@@ -283,32 +286,28 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
 .carousel-nav:hover { background: rgba(61, 212, 204, 0.15); border-color: var(--teal); }
-.carousel-prev { left: -20px; }
-.carousel-next { right: -20px; }
-@media (max-width: 640px) {
-  .carousel-prev { left: 4px; }
-  .carousel-next { right: 4px; }
-}
+.carousel-prev { left: 4px; }
+.carousel-next { right: 4px; }
 
-/* Reels */
-.reels-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  max-width: 760px;
-  margin: 0 auto;
-}
-.reel-item {
-  width: 100%;
+/* Reels carousel */
+.carousel--reels .reel-item-wrap {
+  flex: 0 0 auto;
+  height: 480px;
   aspect-ratio: 9 / 16;
+  scroll-snap-align: center;
   border-radius: var(--radius);
+  overflow: hidden;
   border: 1px solid var(--border);
   background: #000;
+}
+.carousel--reels .reel-item {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 @media (max-width: 640px) {
-  .reels-grid { grid-template-columns: 1fr; max-width: 320px; }
+  .carousel--reels .reel-item-wrap { height: 420px; }
 }
 
 .work-item {
@@ -733,65 +732,67 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
         <h2>My work</h2>
       </div>
       <h3 class="work-subhead">Flyers</h3>
-      <div class="work-grid">
-        <button class="work-item reveal" data-hover data-src="work/01.png" aria-label="Open Bloom & Bond flyer">
-          <img src="work/01.png" alt="Bloom & Bond — Pressed Flower Candle Craft Night" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/01.png</code></span>
-        </button>
-        <button class="work-item reveal delay-1" data-hover data-src="work/02.png" aria-label="Open Botanical Cocktail Class flyer">
-          <img src="work/02.png" alt="Botanical Cocktail Class" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/02.png</code></span>
-        </button>
-        <button class="work-item reveal delay-2" data-hover data-src="work/03.png" aria-label="Open Run the Roses Derby flyer">
-          <img src="work/03.png" alt="Run the Roses — Kentucky Derby Watch Party" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/03.png</code></span>
-        </button>
-        <button class="work-item reveal" data-hover data-src="work/04.png" aria-label="Open Seafood Boil flyer">
-          <img src="work/04.png" alt="Seafood Boil" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/04.png</code></span>
-        </button>
-        <button class="work-item reveal delay-1" data-hover data-src="work/05.png" aria-label="Open Social Hour flyer">
-          <img src="work/05.png" alt="Social Hour" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/05.png</code></span>
-        </button>
-        <button class="work-item reveal delay-2" data-hover data-src="work/06.png" aria-label="Open Swamp Rabbit Year End flyer">
-          <img src="work/06.png" alt="Swamp Rabbit Year End Party" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/06.png</code></span>
-        </button>
-        <button class="work-item reveal" data-hover data-src="work/07.png" aria-label="Open Italian Wine Tasting flyer">
-          <img src="work/07.png" alt="Italian Wine Tasting" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/07.png</code></span>
-        </button>
-        <button class="work-item reveal delay-1" data-hover data-src="work/08.png" aria-label="Open Mother's Day flyer">
-          <img src="work/08.png" alt="Mother's Day" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/08.png</code></span>
-        </button>
-      </div>
-      <div class="work-grid work-grid--tall">
-        <button class="work-item reveal" data-hover data-src="work/tall-01.png" aria-label="Open March Madness flyer">
-          <img src="work/tall-01.png" alt="March Madness — Charlotte City Club" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/tall-01.png</code></span>
-        </button>
-        <button class="work-item reveal delay-1" data-hover data-src="work/tall-02.png" aria-label="Open President's Cup flyer">
-          <img src="work/tall-02.png" alt="President's Cup" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/tall-02.png</code></span>
-        </button>
-        <button class="work-item reveal delay-2" data-hover data-src="work/tall-03.png" aria-label="Open Sushi Class flyer">
-          <img src="work/tall-03.png" alt="Sushi Class" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/tall-03.png</code></span>
-        </button>
-        <button class="work-item reveal delay-1" data-hover data-src="work/tall-04.png" aria-label="Open Havana Nights flyer">
-          <img src="work/tall-04.png" alt="Havana Nights" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/tall-04.png</code></span>
-        </button>
-        <button class="work-item reveal delay-2" data-hover data-src="work/tall-05.png" aria-label="Open Networking flyer">
-          <img src="work/tall-05.png" alt="Networking Event" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/tall-05.png</code></span>
-        </button>
-        <button class="work-item reveal" data-hover data-src="work/tall-06.png" aria-label="Open Charlotte City Club February flyer">
-          <img src="work/tall-06.png" alt="Charlotte City Club — February" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/tall-06.png</code></span>
-        </button>
+      <div class="carousel reveal" data-carousel>
+        <button class="carousel-nav carousel-prev" data-carousel-prev aria-label="Previous">‹</button>
+        <div class="carousel-track">
+          <button class="work-item carousel-item" data-hover data-src="work/01.png" aria-label="Open Bloom & Bond flyer">
+            <img src="work/01.png" alt="Bloom & Bond — Pressed Flower Candle Craft Night" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/01.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/02.png" aria-label="Open Botanical Cocktail Class flyer">
+            <img src="work/02.png" alt="Botanical Cocktail Class" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/02.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/03.png" aria-label="Open Run the Roses Derby flyer">
+            <img src="work/03.png" alt="Run the Roses — Kentucky Derby Watch Party" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/03.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/04.png" aria-label="Open Seafood Boil flyer">
+            <img src="work/04.png" alt="Seafood Boil" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/04.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/05.png" aria-label="Open Social Hour flyer">
+            <img src="work/05.png" alt="Social Hour" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/05.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/06.png" aria-label="Open Swamp Rabbit Year End flyer">
+            <img src="work/06.png" alt="Swamp Rabbit Year End Party" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/06.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/07.png" aria-label="Open Italian Wine Tasting flyer">
+            <img src="work/07.png" alt="Italian Wine Tasting" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/07.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/08.png" aria-label="Open Mother's Day flyer">
+            <img src="work/08.png" alt="Mother's Day" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/08.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/tall-01.png" aria-label="Open March Madness flyer">
+            <img src="work/tall-01.png" alt="March Madness — Charlotte City Club" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/tall-01.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/tall-02.png" aria-label="Open President's Cup flyer">
+            <img src="work/tall-02.png" alt="President's Cup" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/tall-02.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/tall-03.png" aria-label="Open Sushi Class flyer">
+            <img src="work/tall-03.png" alt="Sushi Class" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/tall-03.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/tall-04.png" aria-label="Open Havana Nights flyer">
+            <img src="work/tall-04.png" alt="Havana Nights" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/tall-04.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/tall-05.png" aria-label="Open Networking flyer">
+            <img src="work/tall-05.png" alt="Networking Event" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/tall-05.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="work/tall-06.png" aria-label="Open Charlotte City Club February flyer">
+            <img src="work/tall-06.png" alt="Charlotte City Club — February" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>work/tall-06.png</code></span>
+          </button>
+        </div>
+        <button class="carousel-nav carousel-next" data-carousel-next aria-label="Next">›</button>
       </div>
 
       <h3 class="work-subhead">Social media content</h3>
@@ -823,19 +824,29 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
       </div>
 
       <h3 class="work-subhead">Reels</h3>
-      <div class="reels-grid reveal">
-        <video class="reel-item" controls playsinline preload="metadata" poster="">
-          <source src="reels/reel-01.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <video class="reel-item" controls playsinline preload="metadata">
-          <source src="reels/reel-02.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <video class="reel-item" controls playsinline preload="metadata">
-          <source src="reels/reel-03.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <div class="carousel carousel--reels reveal" data-carousel>
+        <button class="carousel-nav carousel-prev" data-carousel-prev aria-label="Previous">‹</button>
+        <div class="carousel-track">
+          <div class="reel-item-wrap">
+            <video class="reel-item" controls playsinline preload="metadata">
+              <source src="reels/reel-01.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="reel-item-wrap">
+            <video class="reel-item" controls playsinline preload="metadata">
+              <source src="reels/reel-02.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="reel-item-wrap">
+            <video class="reel-item" controls playsinline preload="metadata">
+              <source src="reels/reel-03.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <button class="carousel-nav carousel-next" data-carousel-next aria-label="Next">›</button>
       </div>
     </div>
   </section>
