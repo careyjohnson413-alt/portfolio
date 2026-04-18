@@ -66,29 +66,6 @@ h1 { font-family: 'Roboto', system-ui, sans-serif; font-size: clamp(3.4rem, 11vw
 h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; font-family: 'Roboto', system-ui, sans-serif; margin-bottom: 40px; }
 h3 { font-size: 1.2rem; font-weight: 600; }
 p { margin: 0 0 16px; color: var(--ink-dim); }
-.loader {
-  position: fixed; inset: 0; background: var(--bg); z-index: 999;
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-  transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
-  animation: loaderAutoDismiss 0.01s 2.2s forwards;
-}
-.loader.done, .loader.done * { pointer-events: none; }
-.loader.done { transform: translateY(-100%); pointer-events: none; visibility: hidden; }
-@keyframes loaderAutoDismiss {
-  to { transform: translateY(-100%); pointer-events: none; visibility: hidden; }
-}
-.loader-text {
-  font-family: 'Roboto', system-ui, sans-serif; font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 700; color: var(--ink); overflow: hidden; position: relative;
-}
-.loader-text span {
-  display: inline-block; transform: translateY(100%); opacity: 0;
-  animation: loaderIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-.loader-text span:nth-child(1) { animation-delay: 0.1s; }
-.loader-text span:nth-child(2) { animation-delay: 0.2s; }
-.loader-text span:nth-child(3) { animation-delay: 0.3s; }
-@keyframes loaderIn { to { transform: none; opacity: 1; } }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 40;
   backdrop-filter: saturate(180%) blur(18px); background: rgba(7, 9, 11, 0.6);
@@ -157,16 +134,16 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   opacity: 0; transform: translateY(24px);
   animation: fadeUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
-.tagline { animation-delay: 1.9s; }
-.hero-meta { animation-delay: 2.05s; }
-.hero-cta { animation-delay: 2.2s; }
+.tagline { animation-delay: 0.35s; }
+.hero-meta { animation-delay: 0.5s; }
+.hero-cta { animation-delay: 0.65s; }
 @keyframes fadeUp { to { transform: none; opacity: 1; } }
-.tagline { font-size: clamp(1.15rem, 1.9vw, 1.5rem); color: var(--ink-dim); max-width: 720px; margin: 44px 0 44px; line-height: 1.5; }
-.hero-meta { display: flex; flex-wrap: wrap; gap: 14px; color: var(--ink-mute); font-size: 0.92rem; margin-bottom: 48px; align-items: center; }
+.tagline { font-size: clamp(1.15rem, 1.9vw, 1.5rem); color: var(--ink-dim); max-width: 720px; margin: 44px auto 44px; line-height: 1.5; text-align: center; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 14px; color: var(--ink-mute); font-size: 0.92rem; margin-bottom: 48px; align-items: center; justify-content: center; }
 .hero-meta a { color: var(--ink-mute); }
 .hero-meta a:hover { color: var(--ink); }
 .hero-meta .dot { opacity: 0.4; color: var(--teal); }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 16px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
 .scroll-hint {
   position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
   color: var(--ink-mute); font-size: 0.72rem; letter-spacing: 0.35em;
@@ -402,19 +379,13 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   transition: background 0.2s, transform 0.2s;
 }
 .lightbox-close:hover { background: rgba(255,255,255,0.16); transform: rotate(90deg); }
-.section-head { display: flex; align-items: baseline; gap: 20px; margin-bottom: 64px; }
+.section-head { display: flex; align-items: baseline; gap: 20px; margin-bottom: 64px; justify-content: center; text-align: center; }
 .section-num {
   font-family: 'Roboto Mono', ui-monospace, monospace;
   color: var(--teal); font-size: 0.82rem; letter-spacing: 0.12em;
 }
 .section-head h2 { margin-bottom: 0; }
-.section-head::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(to right, var(--border-strong), transparent);
-  transform-origin: left; transform: scaleX(0);
-  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.section-head.in::after { transform: none; }
+.section-head::after { display: none; }
 .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
 .about-body p { color: var(--ink); font-size: 1.1rem; line-height: 1.8; }
 .about-side p { color: var(--ink-mute); font-size: 0.95rem; }
@@ -583,29 +554,46 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 }
 @media (max-width: 640px) {
   .nav nav { display: none; }
-  .hero { padding: 120px 0 60px; min-height: auto; }
-  .section { padding: 90px 0; }
-  .job { padding: 28px 24px; }
-  .edu-card { grid-template-columns: 1fr; padding: 32px; text-align: center; }
+  .hero { padding: 120px 0 60px; min-height: auto; text-align: center; }
+  .section { padding: 70px 0; }
+  .container { padding: 0 20px; }
+  .section-head { margin-bottom: 40px; }
+  h2 { margin-bottom: 24px; }
+
+  /* About: center everything */
+  .about-grid { text-align: center; }
+  .about-side p, .about-body p { text-align: center; margin-left: auto; margin-right: auto; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .stat { text-align: center; padding: 22px 16px; }
+
+  /* Experience: center headings */
+  .job { padding: 24px 20px; text-align: center; }
+  .job-head { flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+  .job-dates { text-align: center; }
+  .job ul { text-align: left; }
+
+  /* Education centered */
+  .edu-card { grid-template-columns: 1fr; padding: 28px 20px; text-align: center; }
   .edu-badge { margin: 0 auto; }
   .edu-list { justify-content: center; }
+
+  /* Skills centered */
+  .skill-card { text-align: center; }
+  .skill-icon { margin-left: auto; margin-right: auto; }
+
+  /* Contact */
+  .contact { padding: 110px 0; }
+
   .scroll-hint { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
-  .loader { display: none; }
   .hero-line span, .tagline, .hero-meta, .hero-cta, .eyebrow, .nav, .reveal { opacity: 1 !important; transform: none !important; }
 }
 </style>
 </head>
 <body>
-
-<div class="loader" id="loader">
-  <div class="loader-text">
-    <span>C</span><span>A</span><span>J</span>
-  </div>
-</div>
 
 <div class="mesh" aria-hidden="true"></div>
 <header class="nav">
@@ -1007,11 +995,6 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
-
-  // Loader — dismiss as soon as DOM is ready, keep the animation brief
-  const loader = document.getElementById('loader');
-  const dismissLoader = () => loader && loader.classList.add('done');
-  setTimeout(dismissLoader, 700);
 
   // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
