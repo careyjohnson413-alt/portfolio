@@ -289,14 +289,17 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 .carousel-prev { left: 4px; }
 .carousel-next { right: 4px; }
 
-/* Reels row (centered, no carousel) */
+/* Reels: centered row on desktop, carousel on mobile */
+.reels-wrap {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
 .reels-row {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  max-width: 900px;
-  margin: 0 auto;
 }
 .reels-row .reel-item-wrap {
   flex: 0 0 auto;
@@ -313,12 +316,28 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   object-fit: cover;
   display: block;
 }
+.reels-nav { display: none; }
 @media (max-width: 900px) {
   .reels-row .reel-item-wrap { width: 240px; }
 }
 @media (max-width: 640px) {
-  .reels-row { gap: 16px; }
-  .reels-row .reel-item-wrap { width: min(85vw, 280px); }
+  .reels-row {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 4px 16px 14px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .reels-row::-webkit-scrollbar { display: none; }
+  .reels-row .reel-item-wrap {
+    width: min(80vw, 280px);
+    scroll-snap-align: center;
+  }
+  .reels-nav { display: flex; align-items: center; justify-content: center; }
 }
 
 .work-item {
@@ -835,25 +854,29 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
       </div>
 
       <h3 class="work-subhead">Reels</h3>
-      <div class="reels-row reveal">
-        <div class="reel-item-wrap">
-          <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-01.jpg">
-            <source src="reels/reel-01.mp4#t=0.1" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+      <div class="reels-wrap reveal" data-carousel>
+        <button class="carousel-nav carousel-prev reels-nav" data-carousel-prev aria-label="Previous reel">‹</button>
+        <div class="reels-row">
+          <div class="reel-item-wrap carousel-item">
+            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-01.jpg">
+              <source src="reels/reel-01.mp4#t=0.1" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="reel-item-wrap carousel-item">
+            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-02.jpg">
+              <source src="reels/reel-02.mp4#t=0.1" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="reel-item-wrap carousel-item">
+            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-03.jpg">
+              <source src="reels/reel-03.mp4#t=0.1" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
-        <div class="reel-item-wrap">
-          <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-02.jpg">
-            <source src="reels/reel-02.mp4#t=0.1" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="reel-item-wrap">
-          <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-03.jpg">
-            <source src="reels/reel-03.mp4#t=0.1" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+        <button class="carousel-nav carousel-next reels-nav" data-carousel-next aria-label="Next reel">›</button>
       </div>
     </div>
   </section>
@@ -1079,7 +1102,7 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 
   // Carousel nav
   document.querySelectorAll('[data-carousel]').forEach((car) => {
-    const track = car.querySelector('.carousel-track');
+    const track = car.querySelector('.carousel-track, .reels-row');
     const prev = car.querySelector('[data-carousel-prev]');
     const next = car.querySelector('[data-carousel-next]');
     if (!track) return;
