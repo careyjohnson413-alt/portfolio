@@ -7,7 +7,7 @@
 <meta name="description" content="Portfolio of Carey A. Johnson, a digital marketing and communications professional based in Greenville, SC." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet" />
 <style>
 :root {
   --bg: #07090b;
@@ -39,33 +39,23 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-.mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; contain: strict; }
 .mesh::before, .mesh::after {
-  content: ''; position: absolute; width: 70vmax; height: 70vmax;
-  border-radius: 50%; filter: blur(110px); opacity: 0.5; mix-blend-mode: screen;
+  content: ''; position: absolute; width: 60vmax; height: 60vmax;
+  border-radius: 50%; filter: blur(70px); opacity: 0.35;
+  will-change: transform;
 }
 .mesh::before {
   background: radial-gradient(circle, var(--teal) 0%, transparent 60%);
-  top: -20vmax; left: -20vmax; animation: float1 22s ease-in-out infinite;
+  top: -20vmax; left: -20vmax; animation: float1 30s ease-in-out infinite;
 }
 .mesh::after {
   background: radial-gradient(circle, var(--magenta) 0%, transparent 60%);
-  bottom: -25vmax; right: -20vmax; opacity: 0.28; animation: float2 28s ease-in-out infinite;
+  bottom: -25vmax; right: -20vmax; opacity: 0.2; animation: float2 36s ease-in-out infinite;
 }
-.orb {
-  position: absolute; width: 40vmax; height: 40vmax; border-radius: 50%;
-  filter: blur(90px); opacity: 0.35;
-  background: radial-gradient(circle, var(--teal-bright) 0%, transparent 70%);
-  top: 30%; left: 40%; mix-blend-mode: screen; animation: float3 20s ease-in-out infinite;
-}
-@keyframes float1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(18vw,14vh) scale(1.15); } }
-@keyframes float2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-14vw,-12vh) scale(1.1); } }
-@keyframes float3 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(-20vw,10vh) scale(1.2); } 66% { transform: translate(15vw,-8vh) scale(0.9); } }
-.grain {
-  position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  opacity: 0.06; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
-}
+@keyframes float1 { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(12vw,10vh,0); } }
+@keyframes float2 { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(-10vw,-8vh,0); } }
+.grain { display: none; }
 .cursor, .cursor-ring { display: none; }
 main, .nav, .footer { position: relative; z-index: 2; }
 .container { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
@@ -117,11 +107,12 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 .nav-brand::before {
   content: ''; width: 10px; height: 10px; background: var(--teal);
   border-radius: 50%; box-shadow: 0 0 14px var(--teal);
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse 2.4s ease-in-out infinite;
+  will-change: opacity, transform;
 }
 @keyframes pulse {
-  0%,100% { transform: scale(1); opacity: 1; box-shadow: 0 0 14px var(--teal); }
-  50% { transform: scale(1.3); opacity: 0.75; box-shadow: 0 0 24px var(--teal); }
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.7; }
 }
 .nav nav { display: flex; gap: 36px; }
 .nav nav a {
@@ -216,14 +207,29 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 .section { padding: 80px 0; position: relative; }
 
 /* Work grid */
+.work-subhead {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--teal);
+  margin: 0 auto 24px;
+  text-align: center;
+  font-weight: 500;
+  max-width: 760px;
+}
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+@media (max-width: 640px) {
+  .work-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .work-item {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
@@ -439,14 +445,9 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 .contact { padding: 160px 0; text-align: center; position: relative; overflow: hidden; }
 .contact::before {
   content: ''; position: absolute; top: 50%; left: 50%;
-  width: 90%; height: 90%; max-width: 900px; max-height: 900px;
+  width: 80%; height: 80%; max-width: 800px; max-height: 800px;
   background: radial-gradient(circle, rgba(61, 212, 204, 0.18), transparent 60%);
-  transform: translate(-50%,-50%); filter: blur(80px); pointer-events: none;
-  animation: pulseGlow 6s ease-in-out infinite;
-}
-@keyframes pulseGlow {
-  0%,100% { opacity: 0.8; transform: translate(-50%,-50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
+  transform: translate(-50%,-50%); filter: blur(50px); pointer-events: none;
 }
 .contact-inner { position: relative; z-index: 1; }
 .contact h2 { font-family: 'Roboto', system-ui, sans-serif; font-size: clamp(2.5rem, 6vw, 4.2rem); margin: 20px 0 24px; color: var(--ink); }
@@ -494,7 +495,6 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 </div>
 
 <div class="mesh" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
 <header class="nav">
   <div class="nav-inner">
     <a href="#top" class="nav-brand" data-hover>Carey A. Johnson</a>
@@ -648,30 +648,19 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
       <div class="section-head reveal">
         <h2>My work</h2>
       </div>
+      <h3 class="work-subhead">Flyers</h3>
       <div class="work-grid">
-        <button class="work-item reveal" data-hover data-src="work/01.jpg" aria-label="Open flyer 1">
-          <img src="work/01.jpg" alt="Flyer 1" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/01.jpg</code></span>
+        <button class="work-item reveal" data-hover data-src="work/01.png" aria-label="Open Bloom & Bond flyer">
+          <img src="work/01.png" alt="Bloom & Bond — Pressed Flower Candle Craft Night" loading="lazy" />
+          <span class="work-fallback">Drop image at <code>work/01.png</code></span>
         </button>
-        <button class="work-item reveal delay-1" data-hover data-src="work/02.jpg" aria-label="Open flyer 2">
-          <img src="work/02.jpg" alt="Flyer 2" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/02.jpg</code></span>
+        <button class="work-item reveal delay-1" data-hover data-src="work/02.png" aria-label="Open Botanical Cocktail Class flyer">
+          <img src="work/02.png" alt="Botanical Cocktail Class" loading="lazy" />
+          <span class="work-fallback">Drop image at <code>work/02.png</code></span>
         </button>
-        <button class="work-item reveal delay-2" data-hover data-src="work/03.jpg" aria-label="Open flyer 3">
-          <img src="work/03.jpg" alt="Flyer 3" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/03.jpg</code></span>
-        </button>
-        <button class="work-item reveal" data-hover data-src="work/04.jpg" aria-label="Open flyer 4">
-          <img src="work/04.jpg" alt="Flyer 4" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/04.jpg</code></span>
-        </button>
-        <button class="work-item reveal delay-1" data-hover data-src="work/05.jpg" aria-label="Open flyer 5">
-          <img src="work/05.jpg" alt="Flyer 5" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/05.jpg</code></span>
-        </button>
-        <button class="work-item reveal delay-2" data-hover data-src="work/06.jpg" aria-label="Open flyer 6">
-          <img src="work/06.jpg" alt="Flyer 6" loading="lazy" />
-          <span class="work-fallback">Drop image at <code>work/06.jpg</code></span>
+        <button class="work-item reveal delay-2" data-hover data-src="work/03.png" aria-label="Open Run the Roses Derby flyer">
+          <img src="work/03.png" alt="Run the Roses — Kentucky Derby Watch Party" loading="lazy" />
+          <span class="work-fallback">Drop image at <code>work/03.png</code></span>
         </button>
       </div>
     </div>
@@ -804,11 +793,10 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
     });
   });
 
-  // Loader — dismiss on a guaranteed timer so it never hangs
+  // Loader — dismiss as soon as DOM is ready, keep the animation brief
   const loader = document.getElementById('loader');
   const dismissLoader = () => loader && loader.classList.add('done');
-  setTimeout(dismissLoader, 1400);
-  window.addEventListener('load', () => setTimeout(dismissLoader, 1100));
+  setTimeout(dismissLoader, 700);
 
   // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
@@ -846,14 +834,18 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-count]').forEach((el) => countObs.observe(el));
 
-  // Card tilt + spotlight
+  // Card spotlight — rAF-throttled to avoid layout thrash on mousemove
   document.querySelectorAll('[data-tilt], .job').forEach((card) => {
+    let pending = false;
     card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mx', `${(x / rect.width) * 100}%`);
-      card.style.setProperty('--my', `${(y / rect.height) * 100}%`);
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+        card.style.setProperty('--my', `${((e.clientY - rect.top) / rect.height) * 100}%`);
+        pending = false;
+      });
     });
   });
 
