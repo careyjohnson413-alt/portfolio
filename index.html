@@ -79,14 +79,11 @@ h1 { font-family: 'Roboto', system-ui, sans-serif; font-size: clamp(3.4rem, 11vw
 h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; font-family: 'Roboto', system-ui, sans-serif; margin-bottom: 40px; }
 h3 { font-size: 1.2rem; font-weight: 600; }
 p { margin: 0 0 16px; color: var(--ink-dim); }
-.nav-inner { position: relative; }
+.nav-brand-wrap { display: flex; flex-direction: column; gap: 2px; line-height: 1.1; }
 .nav-note {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.72rem; letter-spacing: 0.02em;
-  color: var(--ink-mute); opacity: 0.8;
+  font-size: 0.68rem; letter-spacing: 0.02em;
+  color: var(--ink-mute); opacity: 0.75;
   white-space: nowrap;
-  pointer-events: none;
 }
 @media (max-width: 900px) {
   .nav-note { display: none; }
@@ -696,8 +693,10 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 <div class="mesh" aria-hidden="true"></div>
 <header class="nav">
   <div class="nav-inner">
-    <a href="#top" class="nav-brand" data-hover>Carey A. Johnson</a>
-    <span class="nav-note">Designed &amp; built by Carey — part of the portfolio.</span>
+    <div class="nav-brand-wrap">
+      <a href="#top" class="nav-brand" data-hover>Carey A. Johnson</a>
+      <span class="nav-note">Website built &amp; designed by Carey</span>
+    </div>
     <nav aria-label="Primary">
       <a href="#about" data-hover>About</a>
       <a href="#work" data-hover>Work</a>
