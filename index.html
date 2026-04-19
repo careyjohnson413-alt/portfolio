@@ -282,7 +282,7 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 /* Reels: centered row on desktop, carousel on mobile */
 .reels-wrap {
   position: relative;
-  max-width: 900px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 .reels-row {
@@ -293,7 +293,7 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 }
 .reels-row .reel-item-wrap {
   flex: 0 0 auto;
-  width: 260px;
+  width: 230px;
   aspect-ratio: 9 / 16;
   border-radius: var(--radius);
   overflow: hidden;
@@ -924,6 +924,30 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
         <button class="carousel-nav carousel-next" data-carousel-next aria-label="Next">›</button>
       </div>
 
+      <h3 class="work-subhead">Logos</h3>
+      <div class="carousel reveal" data-carousel>
+        <button class="carousel-nav carousel-prev" data-carousel-prev aria-label="Previous">‹</button>
+        <div class="carousel-track">
+          <button class="work-item carousel-item" data-hover data-src="logos/cfc-logo.png" aria-label="Open CFC logo">
+            <img src="logos/cfc-logo.png" alt="CFC logo" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>logos/cfc-logo.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="logos/cj-marketing.png" aria-label="Open CJ Marketing logo">
+            <img src="logos/cj-marketing.png" alt="CJ Marketing logo" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>logos/cj-marketing.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="logos/wib-logo.png" aria-label="Open WIB logo">
+            <img src="logos/wib-logo.png" alt="WIB logo" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>logos/wib-logo.png</code></span>
+          </button>
+          <button class="work-item carousel-item" data-hover data-src="logos/young-executives.png" aria-label="Open Young Executives logo">
+            <img src="logos/young-executives.png" alt="Young Executives logo" loading="lazy" />
+            <span class="work-fallback">Drop image at <code>logos/young-executives.png</code></span>
+          </button>
+        </div>
+        <button class="carousel-nav carousel-next" data-carousel-next aria-label="Next">›</button>
+      </div>
+
       <h3 class="work-subhead">Reels</h3>
       <div class="reels-wrap reveal" data-carousel>
         <button class="carousel-nav carousel-prev reels-nav" data-carousel-prev aria-label="Previous reel">‹</button>
@@ -943,6 +967,12 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
           <div class="reel-item-wrap carousel-item">
             <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-03.jpg">
               <source src="reels/reel-03.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="reel-item-wrap carousel-item">
+            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-04.jpg">
+              <source src="reels/reel-04.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
