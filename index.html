@@ -406,8 +406,12 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 /* Desktop-only 3D growth chart */
 .growth-chart { display: none; }
 @media (min-width: 901px) {
+  .about-grid { align-items: stretch; }
+  .about-side { display: flex; flex-direction: column; }
   .growth-chart {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     margin-top: 40px;
     padding: 28px 20px 20px;
     border-radius: 16px;
@@ -434,10 +438,10 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
     margin-bottom: 8px;
     position: relative;
   }
-  .chart-svg { width: 100%; height: auto; display: block; position: relative; }
+  .chart-svg { width: 100%; height: auto; display: block; position: relative; flex: 1; min-height: 0; }
   .chart-svg .bar {
     transform: scaleY(0);
-    transform-origin: 50% 250px;
+    transform-origin: 50% 430px;
     opacity: 0;
   }
   .reveal.in .chart-svg .bar {
@@ -731,7 +735,7 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
           </p>
           <div class="growth-chart" aria-hidden="true">
             <div class="chart-title">Year-over-year engagement growth</div>
-            <svg class="chart-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <svg class="chart-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="barFront" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0" stop-color="#a9f0e4" />
@@ -751,48 +755,49 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
                 </filter>
               </defs>
               <g class="chart-grid" stroke="rgba(121,226,207,0.10)" stroke-width="1" fill="none">
-                <polygon points="40,250 360,250 377,240 57,240" fill="rgba(121,226,207,0.03)" />
-                <line x1="40" y1="210" x2="360" y2="210" stroke-dasharray="2 4" />
-                <line x1="40" y1="170" x2="360" y2="170" stroke-dasharray="2 4" />
+                <polygon points="40,430 360,430 377,420 57,420" fill="rgba(121,226,207,0.03)" />
+                <line x1="40" y1="370" x2="360" y2="370" stroke-dasharray="2 4" />
+                <line x1="40" y1="310" x2="360" y2="310" stroke-dasharray="2 4" />
+                <line x1="40" y1="250" x2="360" y2="250" stroke-dasharray="2 4" />
+                <line x1="40" y1="190" x2="360" y2="190" stroke-dasharray="2 4" />
                 <line x1="40" y1="130" x2="360" y2="130" stroke-dasharray="2 4" />
-                <line x1="40" y1="90" x2="360" y2="90" stroke-dasharray="2 4" />
               </g>
               <g class="chart-bars" filter="url(#barGlow)">
                 <g class="bar" style="--i:0">
-                  <polygon class="face-side" points="90,250 107,240 107,199 90,209" fill="url(#barSide)" />
-                  <polygon class="face-top" points="40,209 90,209 107,199 57,199" fill="url(#barTop)" />
-                  <polygon class="face-front" points="40,250 90,250 90,209 40,209" fill="url(#barFront)" />
+                  <polygon class="face-side" points="90,430 107,420 107,345 90,355" fill="url(#barSide)" />
+                  <polygon class="face-top" points="40,355 90,355 107,345 57,345" fill="url(#barTop)" />
+                  <polygon class="face-front" points="40,430 90,430 90,355 40,355" fill="url(#barFront)" />
                 </g>
                 <g class="bar" style="--i:1">
-                  <polygon class="face-side" points="180,250 197,240 197,181 180,191" fill="url(#barSide)" />
-                  <polygon class="face-top" points="130,191 180,191 197,181 147,181" fill="url(#barTop)" />
-                  <polygon class="face-front" points="130,250 180,250 180,191 130,191" fill="url(#barFront)" />
+                  <polygon class="face-side" points="180,430 197,420 197,313 180,323" fill="url(#barSide)" />
+                  <polygon class="face-top" points="130,323 180,323 197,313 147,313" fill="url(#barTop)" />
+                  <polygon class="face-front" points="130,430 180,430 180,323 130,323" fill="url(#barFront)" />
                 </g>
                 <g class="bar" style="--i:2">
-                  <polygon class="face-side" points="270,250 287,240 287,65 270,75" fill="url(#barSide)" />
-                  <polygon class="face-top" points="220,75 270,75 287,65 237,65" fill="url(#barTop)" />
-                  <polygon class="face-front" points="220,250 270,250 270,75 220,75" fill="url(#barFront)" />
+                  <polygon class="face-side" points="270,430 287,420 287,100 270,110" fill="url(#barSide)" />
+                  <polygon class="face-top" points="220,110 270,110 287,100 237,100" fill="url(#barTop)" />
+                  <polygon class="face-front" points="220,430 270,430 270,110 220,110" fill="url(#barFront)" />
                 </g>
                 <g class="bar" style="--i:3">
-                  <polygon class="face-side" points="360,250 377,240 377,60 360,70" fill="url(#barSide)" />
-                  <polygon class="face-top" points="310,70 360,70 377,60 327,60" fill="url(#barTop)" />
-                  <polygon class="face-front" points="310,250 360,250 360,70 310,70" fill="url(#barFront)" />
+                  <polygon class="face-side" points="360,430 377,420 377,91 360,101" fill="url(#barSide)" />
+                  <polygon class="face-top" points="310,101 360,101 377,91 327,91" fill="url(#barTop)" />
+                  <polygon class="face-front" points="310,430 360,430 360,101 310,101" fill="url(#barFront)" />
                 </g>
               </g>
-              <g class="chart-values" font-family="Roboto, sans-serif" font-size="11" font-weight="700" fill="#a9f0e4" text-anchor="middle">
-                <text x="65" y="202">+144%</text>
-                <text x="155" y="184">+206%</text>
-                <text x="245" y="68">+615%</text>
-                <text x="335" y="63">+633%</text>
+              <g class="chart-values" font-family="Roboto, sans-serif" font-size="16" font-weight="700" fill="#a9f0e4" text-anchor="middle">
+                <text x="65" y="348">+144%</text>
+                <text x="155" y="316">+206%</text>
+                <text x="245" y="103">+615%</text>
+                <text x="335" y="94">+633%</text>
               </g>
-              <g class="chart-labels" font-family="Roboto, sans-serif" font-size="10" fill="#8a96a0" text-anchor="middle">
-                <text x="65" y="275">FB Visits</text>
-                <text x="155" y="275">IG Visits</text>
-                <text x="245" y="275">Link Clicks</text>
-                <text x="335" y="275">IG Reach</text>
+              <g class="chart-labels" font-family="Roboto, sans-serif" font-size="13" fill="#8a96a0" text-anchor="middle">
+                <text x="65" y="460">FB Visits</text>
+                <text x="155" y="460">IG Visits</text>
+                <text x="245" y="460">Link Clicks</text>
+                <text x="335" y="460">IG Reach</text>
               </g>
-              <g class="chart-trend" stroke="rgba(121,226,207,0.7)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="65,209 155,191 245,75 335,70" stroke-dasharray="500" stroke-dashoffset="500" />
+              <g class="chart-trend" stroke="rgba(121,226,207,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="65,355 155,323 245,110 335,101" stroke-dasharray="800" stroke-dashoffset="800" />
               </g>
             </svg>
           </div>
