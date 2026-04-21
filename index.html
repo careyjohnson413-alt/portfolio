@@ -308,6 +308,30 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   overflow: hidden;
   border: 1px solid var(--border);
   background: #000;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+}
+.reels-row .reel-item-wrap:hover {
+  transform: translateY(-4px);
+  border-color: var(--teal);
+}
+.reel-play {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+  border: 1.5px solid rgba(255,255,255,0.85);
+  color: #fff; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  padding-left: 4px;
+  pointer-events: none;
+  transition: background 0.3s, transform 0.3s, border-color 0.3s;
+}
+.reels-row .reel-item-wrap:hover .reel-play {
+  background: var(--teal); color: #000; border-color: var(--teal);
+  transform: translate(-50%, -50%) scale(1.08);
 }
 .reels-row .reel-item {
   width: 100%;
@@ -383,7 +407,7 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   transition: opacity 0.3s ease;
 }
 .lightbox.open { opacity: 1; pointer-events: auto; }
-.lightbox img {
+.lightbox img, .lightbox video {
   max-width: 100%; max-height: 100%;
   object-fit: contain;
   border-radius: 8px;
@@ -391,7 +415,13 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   transform: scale(0.96);
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.lightbox.open img { transform: none; }
+.lightbox video {
+  aspect-ratio: 9 / 16;
+  max-height: 90vh;
+  max-width: min(50vh, 90vw);
+  background: #000;
+}
+.lightbox.open img, .lightbox.open video { transform: none; }
 .lightbox-close {
   position: absolute; top: 24px; right: 24px;
   width: 44px; height: 44px; border-radius: 50%;
@@ -940,36 +970,36 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
       <div class="reels-wrap reveal" data-carousel>
         <button class="carousel-nav carousel-prev reels-nav" data-carousel-prev aria-label="Previous reel">‹</button>
         <div class="reels-row">
-          <div class="reel-item-wrap carousel-item">
-            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-01.jpg">
+          <button type="button" class="reel-item-wrap carousel-item" data-hover data-video-src="reels/reel-01.mp4" data-poster="reels/reel-01.jpg" aria-label="Open reel 1">
+            <video class="reel-item" playsinline preload="metadata" muted poster="reels/reel-01.jpg">
               <source src="reels/reel-01.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
-          </div>
-          <div class="reel-item-wrap carousel-item">
-            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-05.jpg">
+            <span class="reel-play" aria-hidden="true">▶</span>
+          </button>
+          <button type="button" class="reel-item-wrap carousel-item" data-hover data-video-src="reels/reel-05.mp4" data-poster="reels/reel-05.jpg" aria-label="Open reel 5">
+            <video class="reel-item" playsinline preload="metadata" muted poster="reels/reel-05.jpg">
               <source src="reels/reel-05.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
-          </div>
-          <div class="reel-item-wrap carousel-item">
-            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-02.jpg">
+            <span class="reel-play" aria-hidden="true">▶</span>
+          </button>
+          <button type="button" class="reel-item-wrap carousel-item" data-hover data-video-src="reels/reel-02.mp4" data-poster="reels/reel-02.jpg" aria-label="Open reel 2">
+            <video class="reel-item" playsinline preload="metadata" muted poster="reels/reel-02.jpg">
               <source src="reels/reel-02.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
-          </div>
-          <div class="reel-item-wrap carousel-item">
-            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-03.jpg">
+            <span class="reel-play" aria-hidden="true">▶</span>
+          </button>
+          <button type="button" class="reel-item-wrap carousel-item" data-hover data-video-src="reels/reel-03.mp4" data-poster="reels/reel-03.jpg" aria-label="Open reel 3">
+            <video class="reel-item" playsinline preload="metadata" muted poster="reels/reel-03.jpg">
               <source src="reels/reel-03.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
-          </div>
-          <div class="reel-item-wrap carousel-item">
-            <video class="reel-item" controls playsinline preload="metadata" poster="reels/reel-04.jpg">
+            <span class="reel-play" aria-hidden="true">▶</span>
+          </button>
+          <button type="button" class="reel-item-wrap carousel-item" data-hover data-video-src="reels/reel-04.mp4" data-poster="reels/reel-04.jpg" aria-label="Open reel 4">
+            <video class="reel-item" playsinline preload="metadata" muted poster="reels/reel-04.jpg">
               <source src="reels/reel-04.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
-          </div>
+            <span class="reel-play" aria-hidden="true">▶</span>
+          </button>
         </div>
         <button class="carousel-nav carousel-next reels-nav" data-carousel-next aria-label="Next reel">›</button>
       </div>
@@ -1103,6 +1133,7 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
   <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
   <img id="lightbox-img" src="" alt="" />
+  <video id="lightbox-video" controls playsinline controlsList="nodownload nofullscreen" disablePictureInPicture preload="metadata"></video>
 </div>
 
 <footer class="footer">
@@ -1194,10 +1225,22 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   // Lightbox
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxVideo = document.getElementById('lightbox-video');
   const lightboxClose = document.getElementById('lightbox-close');
-  const openLightbox = (src, alt) => {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || '';
+  const openLightbox = (src, alt, isVideo = false, poster = '') => {
+    if (isVideo) {
+      lightboxImg.style.display = 'none';
+      lightboxVideo.style.display = '';
+      if (poster) lightboxVideo.poster = poster;
+      lightboxVideo.src = src;
+      lightboxVideo.load();
+      lightboxVideo.play().catch(() => {});
+    } else {
+      lightboxVideo.style.display = 'none';
+      lightboxImg.style.display = '';
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+    }
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -1206,13 +1249,26 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    setTimeout(() => { lightboxImg.src = ''; }, 300);
+    lightboxVideo.pause();
+    setTimeout(() => {
+      lightboxImg.src = '';
+      lightboxVideo.removeAttribute('src');
+      lightboxVideo.load();
+    }, 300);
   };
   document.querySelectorAll('.work-item').forEach((btn) => {
     btn.addEventListener('click', () => {
       const img = btn.querySelector('img');
       if (!img || img.getAttribute('data-loaded') !== 'true') return;
       openLightbox(btn.dataset.src || img.src, img.alt);
+    });
+  });
+  document.querySelectorAll('.reel-item-wrap').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      // don't trigger when carousel nav buttons are clicked inside wrap (they shouldn't be, but safety)
+      const src = btn.dataset.videoSrc;
+      if (!src) return;
+      openLightbox(src, '', true, btn.dataset.poster || '');
     });
   });
 
