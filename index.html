@@ -297,13 +297,19 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
 }
 .reels-row {
   display: flex;
-  justify-content: center;
   gap: 20px;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 48px 14px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.reels-row::-webkit-scrollbar { display: none; }
+.reels-row .reel-item-wrap { scroll-snap-align: center; }
 .reels-row .reel-item-wrap {
   flex: 0 0 auto;
-  width: 190px;
+  width: 230px;
   aspect-ratio: 9 / 16;
   border-radius: var(--radius);
   overflow: hidden;
@@ -340,7 +346,6 @@ p { margin: 0 0 16px; color: var(--ink-dim); }
   object-fit: cover;
   display: block;
 }
-.reels-nav { display: none; }
 @media (max-width: 900px) {
   .reels-row .reel-item-wrap { width: 240px; }
 }
